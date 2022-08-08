@@ -6,7 +6,7 @@ using namespace std;
 
 int sum(int x){
 	if(x <= 9){
-		return 9;
+		return x;
 	}
 	return (x%10) + sum(x/10);
 }
