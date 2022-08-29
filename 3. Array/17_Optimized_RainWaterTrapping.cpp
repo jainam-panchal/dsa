@@ -18,7 +18,7 @@ int maxWater(int arr[], int n)
 
     // calculating trapped water values
     int water = 0;
-    for (int i = 1; i < n - 2; i++)
+    for (int i = 1; i < n - 1; i++)
     {
         if (min(left[i - 1], right[i + 1]) > arr[i])
         {
