@@ -23,6 +23,7 @@ class ourmap {
     MapNode<V>** buckets;
     int count;
     int totalSize;
+    double loadFactor;
 
     public:
     ourmap(){
@@ -44,6 +45,11 @@ class ourmap {
         return count;
     }
 
+    double getLoadFactor(){
+        return loadFactor;
+    }
+
+
     private:
         int getHashIndex (string key){
             int hashcode=0;
@@ -51,11 +57,38 @@ class ourmap {
             for(int i=0; i<key.size()-1; i++){
                 hashcode += key[i] * coeff;
                 hashcode = hashcode % totalSize;
-                coeff *= 17;
+                coeff *= 37;
                 coeff = coeff % totalSize;
             }
-            
             return hashcode;
+        }
+        
+        void rehash(){
+            MapNode<int>** old = buckets;
+            int oldtotalSize = totalSize;
+            totalSize *= 2;
+            count=0;
+            buckets = new MapNode<V>*[totalSize];
+            for(int i=0; i<totalSize; i++){
+                buckets[i] = NULL;
+            }
+
+            for(int i=0; i<oldtotalSize; i++){
+                MapNode<V>* head = old[i];
+                while(head != NULL){
+                    string key = head->key;
+                    V value = head->value;
+                    insert(key,value);
+                    head = head->next;   
+                }
+            }
+
+            // now deleting old hashmap
+            for(int i=0; i<oldtotalSize; i++){
+                MapNode<V>* head = old[i];
+                delete head;
+            }
+            delete [] old;
         }
 
     public:
@@ -71,14 +104,20 @@ class ourmap {
             }
             head = head->next;
         }
-
         // if execution comes here then it means there is no such key exists
         head = buckets[index];\
         MapNode<V>* newNode = new MapNode<V>(key,value);
         newNode->next = head;
         buckets[index] = newNode;
         count++;
+        // Rehashing Implementation
+        loadFactor = (1.0*count) / totalSize;
+        if (loadFactor > 0.7) {
+            rehash();
+        }
     }
+
+
 
     V remove(string key){
         // first case if it exists then return the value
