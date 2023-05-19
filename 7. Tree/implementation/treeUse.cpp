@@ -36,12 +36,23 @@ TreeNode<int>* takeInput() {
     return root;
 }
 
-int countNodes(TreeNode<int>* root){
+int countNodes(TreeNode<int>* root) {
     int ans = 1;
     for(int i=0; i<root->children.size(); i++){
         ans += countNodes(root->children[i]);
     }
     return ans;
+}
+
+int countSumOfNodes(TreeNode<int>* root) {
+    int sum = 0;
+    sum += root->data;
+
+    for(int i=0; i<root->children.size(); i++){
+        sum += countSumOfNodes(root->children[i]);
+    }
+
+    return sum;
 }
 
 int main() {
@@ -56,6 +67,6 @@ int main() {
 
     TreeNode<int>* root2 = takeInput();
     printTree(root2);
-    cout << countNodes(root2);
+    cout << "Sum of Nodes : " << countSumOfNodes(root2) << endl;
     return 0;
 }
