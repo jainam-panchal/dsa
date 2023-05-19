@@ -67,6 +67,7 @@ int main() {
 
     TreeNode<int>* root2 = takeInput();
     printTree(root2);
+    cout << "Count of Nodes : " << countNodes(root2) << endl;
     cout << "Sum of Nodes : " << countSumOfNodes(root2) << endl;
     return 0;
 }
