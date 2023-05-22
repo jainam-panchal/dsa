@@ -1,3 +1,5 @@
+// https://www.codingninjas.com/codestudio/problems/occurrence-of-x-in-a-sorted-array_630456
+
 int firstIndex (vector<int>& arr,int n,int k) {
     int start = 0;
     int end = n - 1;
