@@ -1,47 +1,43 @@
-// https://www.codingninjas.com/codestudio/problems/painter-s-partition-problem_1089557
-
-
-bool isPossibleSol(vector<int> &boards, int n, int k, int mid){
-    int painter  = 1;
+bool isPossible(vector<int>& boards, int k, int mid, int sum) {
+    int painter = 1;
     int boardsPainted = 0;
-    
-    for(int i = 0; i<n; i++){
-        if(boardsPainted + boards[i]<=mid){
+
+    for (int i=0; i<boards.size(); i++)
+    {
+        if(boardsPainted + boards[i] <= mid ) {
             boardsPainted = boardsPainted + boards[i];
         }
-        else{
+        else {
             painter++;
-            if(painter > k || boards[i] > mid){
+            if(painter>k || boards[i]>mid)
                 return false;
-            }
             boardsPainted = boards[i];
         }
     }
     return true;
 }
-
-
 int findLargestMinDistance(vector<int> &boards, int k)
 {
-    int s = 0;
+    //    Write your code here.
+    int start = 0;
     int sum = 0;
-    int n = boards.size();
-    for(int i = 0; i<n; i++){
-        sum = sum + boards[i];
+    for (int i=0; i<boards.size(); i++) {
+        sum += boards[i];
     }
-    int e = sum;
-    int mid = s + (e-s)/2;
-    int ans = -1;
+    int end = sum;
     
-    while(s<=e){
-        if(isPossibleSol(boards,n,k,mid)){
+    int ans = -1;
+
+    int mid = start + (end - start) / 2;
+    while(start <= end) {
+        if(isPossible(boards,k,mid,sum)) {
             ans = mid;
-            e = mid - 1;
+            end = mid - 1;
         }
-        else{
-            s = mid + 1;
+        else {
+            start = mid + 1;
         }
-        mid = s + (e-s)/2;
+        mid = start + (end - start) / 2;
     }
     return ans;
 }
