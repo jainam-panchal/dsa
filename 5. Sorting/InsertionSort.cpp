@@ -1,3 +1,5 @@
+// sorting algorithm that places an unsorted element at its suitable place in each iteration
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +31,7 @@ void printArray(int arr[], int size)
 
 int main()
 {
-    int arr[] = {64, 25, 12, 22, 11};
+    int arr[] = {64, 25, 12, 22, 11};   
     int n = sizeof(arr) / sizeof(arr[0]);
     insertionSort(arr, n);
     cout << "Sorted array: \n";

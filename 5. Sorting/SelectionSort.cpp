@@ -1,49 +1,42 @@
-// C++ program for implementation of
-// selection sort
-#include <bits/stdc++.h>
+// selection sort --  in every round the smallest value takes their correct place.
+
+#include <iostream>
 using namespace std;
 
-// Swap function
-void swap(int *xp, int *yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
-}
+void selection_sort(int arr[], int n) {
+    int i,j,min_index;
 
-void selectionSort(int arr[], int n)
-{
-    int min, i;
+    for(i=0; i<n-1; i++) {
+        min_index = i;
 
-    for (int i = 0; i < n - 1; i++)
-    {
-        min = i;
-
-        for (int j = i + 1; j < n; j++)
-        {
-            if (arr[j] < arr[min])
-            {
-                min = j;
+        for(j=i+1; j<n; j++) {
+            if(arr[min_index] > arr[j]) {
+                min_index = j;
             }
         }
-        swap(arr[min], arr[i]);
+
+        if(min_index != i) {
+            swap(arr[min_index], arr[i]);
+        }
     }
 }
 
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i = 0; i < size; i++)
-        cout << arr[i] << " ";
+void print(int arr[],int n) {
+    for(int i=0; i<n; i++) {
+        cout << arr[i] << ", ";
+    }
     cout << endl;
 }
 
-int main()
-{
-    int arr[] = {64, 25, 12, 22, 11};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    selectionSort(arr, n);
-    cout << "Sorted array: \n";
-    printArray(arr, n);
-    return 0;
+
+int main() {
+
+    int arr[] = {1,5,1,2,4,51,9};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << "Unsorted : " ;
+    print(arr,size);
+    cout << "Sorted   : " ;
+    selection_sort(arr,size);
+    print(arr,size);
+
 }
