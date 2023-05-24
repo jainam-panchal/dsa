@@ -1,40 +1,48 @@
 // sorting algorithm that places an unsorted element at its suitable place in each iteration
 
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-void insertionSort(int arr[], int n)
-{
-    int value, j;
-    for (int i = 1; i < n; i++)
+void insertion_sort(int arr[], int n) {
+    
+    for(int i=1 ; i<n ; i++)
     {
-        value = arr[i];
-        j = i;
+        // select one element and insert it into the correct spot in the array
+        int temp = arr[i];
+        int j = i-1;
 
-        while (j >= 1 && arr[j - 1] > value)
-        {
-            arr[j] = arr[j - 1];
+        while(j >= 0) {
+            if(arr[j] > temp)
+                // move elements 
+                arr[j+1] = arr[j];
+            else
+                // found the right spot
+                break;
             j--;
         }
 
-        arr[j] = value;
+        // put the value
+        arr[j+1] = temp;
     }
+    
 }
 
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i = 0; i < size; i++)
-        cout << arr[i] << " ";
+void print(int arr[],int n) {
+    for(int i=0; i<n; i++) {
+        cout << arr[i] << ", ";
+    }
     cout << endl;
 }
 
-int main()
-{
-    int arr[] = {64, 25, 12, 22, 11};   
-    int n = sizeof(arr) / sizeof(arr[0]);
-    insertionSort(arr, n);
-    cout << "Sorted array: \n";
-    printArray(arr, n);
-    return 0;
+
+int main() {
+
+    int arr[] = {1,5,1,2,4,51,9};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << "Unsorted : " ;
+    print(arr,size);
+    cout << "Sorted   : " ;
+    insertion_sort(arr,size);
+    print(arr,size);
+
 }
