@@ -1,3 +1,4 @@
+// stable algorithm
 // bubble sort - in every round the largest value takes their correct place.
 
 #include <iostream>

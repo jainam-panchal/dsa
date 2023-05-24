@@ -1,3 +1,4 @@
+// Unstable algorithm
 // selection sort --  in every round the smallest value takes their correct place.
 
 #include <iostream>

@@ -1,3 +1,4 @@
+// stable algorithm
 // sorting algorithm that places an unsorted element at its suitable place in each iteration
 
 #include <iostream>
